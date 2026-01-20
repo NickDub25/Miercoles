@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="initial-scale=1">
+<title>Certificado de Asistencia - Mater Hospital</title>
+<style>
+  /* --- ESTILOS GENERALES --- */
+  body {
+    font: 14px Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .contenedor {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .linea_verde {
+    height: 2px;
+    background: #009688;
+    margin: 10px 0 20px 0;
+  }
+  .titulo_principal {
+    color: #009688;
+    font-size: 22px;
+    margin: 0 0 20px 0;
+  }
+  /* Estilos para las filas de datos */
+  .fila_detalle {
+    display: flex;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .etiqueta {
+    font-weight: bold;
+    min-width: 160px; /* Ancho fijo para alinear columnas */
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .valor {
+      flex-grow: 1;
+  }
+  .divisor {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 20px 0;
+  }
+  
+  /* --- ESTILOS DE FORMULARIO (VISTA 1) --- */
+  .entrada_texto, .entrada_hora {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+  .entrada_texto { width: 100%; box-sizing: border-box; }
+  .entrada_hora { width: 100px; }
+
+  /* --- ESTILOS DE BOTONES --- */
+  .boton_verde {
+    background: #009688;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  .boton_gris_back {
+    background: #888;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  /* --- ESTILOS DE LA VISTA FINAL (VISTA 2) --- */
+  .firma_texto_final {
+      font-size: 16px;
+      color: #333;
+      margin-top: 5px;
+      display: block;
+  }
+  .timestamp_footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      font-size: 11px;
+      color: #777;
+      font-family: monospace;
+  }
+  
+  /* Clase para ocultar vistas */
+  .oculto { display: none; }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+  
+  <div class="encabezado">
+    <div style="font-size: 26px; font-weight: bold; color: #009688;">con<span style="color:#333">[text]</span></div>
+    <div style="font-size: 10px; color: #999; text-align: right;">
+        (Logos placeholder)
+    </div>
+  </div>
+  <div style="text-align: right; margin: 15px 0;">
+    Sign out <a href="#" style="color: #009688; text-decoration: none;">Nicolas Ledesma</a>
+  </div>
+  <div class="linea_verde"></div>
+  <h1 class="titulo_principal">Certificate of Attendance for Interpreter</h1>
+
+
+  <div id="vistaFormulario">
+      <div class="fila_detalle"><span class="etiqueta">Project</span><span class="valor">26315235 - 21Jan26, 08:30, MRN 1454274, PT</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Due</span><span class="valor">08:30 on Wednesday 21st January 2026</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Client/Department</span><span class="valor">Mater - GI Unit</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Location</span><span class="valor">Mater Hospital - GI Unit, D07 R2WY</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Contact</span><span class="valor">Sonya Walsh</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Procedure Type</span><span class="valor">Face-to-face</span></div>
+      <br>
+      <div class="fila_detalle"><span class="etiqueta">Interpreter</span><span class="valor">Nicolas Ledesma</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Language Required</span><span class="valor">English - Portuguese</span></div>
+
+      <div class="linea_verde"></div>
+
+      <div class="fila_detalle">
+          <span class="etiqueta">Assignment Date</span>
+          <span class="valor">Wednesday 21st January 2026</span>
+      </div>
+      <div class="fila_detalle" style="align-items: center;">
+          <span class="etiqueta">Interpreter Arrived</span>
+          <input type="time" id="inputHoraLlegada" class="entrada_hora" value="08:30">
+      </div>
+      <div class="fila_detalle" style="align-items: center;">
+          <span class="etiqueta">Interpreter Finished</span>
+          <input type="time" id="inputHoraSalida" class="entrada_hora" value="11:30">
+      </div>
+
+      <div style="margin-top: 20px;">
+        <p style="font-size: 14px; color: #666;">I confirm that the interpreting session details above are correct.</p>
+        <label class="etiqueta" style="margin-bottom: 5px; display:block;">Signature/Name</label>
+        <input type="text" id="inputNombreFirma" class="entrada_texto" placeholder="Enter name to sign...">
+      </div>
+
+      <p style="font-size: 12px; color: #666; margin-top: 20px;">Please check the start and end times before signing for the attendance. Thank you.</p>
+      
+      <div class="linea_verde"></div>
+
+      <div style="margin-top: 20px; display: flex; gap: 10px;">
+        <button class="boton_gris_back">&lt; BACK</button>
+        <button class="boton_verde" onclick="finalizarFirma()">SIGN ATTENDANCE</button>
+      </div>
+  </div>
+
+
+  <div id="vistaFinal" class="oculto">
+      <div class="fila_detalle"><span class="etiqueta">Project</span><span class="valor">26315235 - 21Jan26, 08:30, MRN 1454274, PT</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Due</span><span class="valor">08:30 on Wednesday 21st January 2026</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Client/Department</span><span class="valor">Mater - GI Unit</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Location</span><span class="valor">Mater Hospital - GI Unit, D07 R2WY</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Contact</span><span class="valor">Sonya Walsh</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Procedure Type</span><span class="valor">Face-to-face</span></div>
+      <br>
+      <div class="fila_detalle"><span class="etiqueta">Interpreter</span><span class="valor">Nicolas Ledesma</span></div>
+      <div class="fila_detalle"><span class="etiqueta">Language Required</span><span class="valor">English - Portuguese</span></div>
+
+      <div class="linea_verde"></div>
+
+      <div class="fila_detalle">
+          <span class="etiqueta">Assignment Date</span>
+          <span class="valor">Wednesday 21st January 2026</span>
+      </div>
+      <div class="fila_detalle">
+          <span class="etiqueta">Interpreter Arrived</span>
+          <span id="spanHoraLlegadaFinal" class="valor"></span>
+      </div>
+      <div class="fila_detalle">
+          <span class="etiqueta">Interpreter Finished</span>
+          <span id="spanHoraSalidaFinal" class="valor"></span>
+      </div>
+
+      <div class="fila_detalle" style="margin-top: 20px;">
+        <span class="etiqueta">Signature/Name</span>
+        <div class="valor">
+            <div style="font-size: 14px; color: #666; margin-bottom: 5px;">I confirm that the interpreting session details above are correct.</div>
+            <span id="spanNombreFirmaFinal" class="firma_texto_final"></span>
+        </div>
+      </div>
+
+      <div class="linea_verde" style="margin-top: 30px;"></div>
+
+      <div style="margin-top: 20px;">
+        <button class="boton_gris_back" onclick="volverAlFormulario()">&lt; BACK</button>
+      </div>
+
+      <div id="timestampFinal" class="timestamp_footer"></div>
+  </div>
+
+
+  <div style="font-size: 11px; color: #777; margin-top: 30px; line-height: 1.5;">
+    <p style="margin: 0;">
+        <u style="cursor: pointer;">Context interpreters work to a strict Code of Ethics and Practice Guidelines.</u><br>
+        They facilitate communication between practitioner and client. They interpret everything that is being said and hold all information imparted in confidence.
+    </p>
+  </div>
+
+</div>
+
+
+<script>
+  function finalizarFirma() {
+    var nombre = document.getElementById('inputNombreFirma').value;
+    var horaLlegada = document.getElementById('inputHoraLlegada').value;
+    var horaSalida = document.getElementById('inputHoraSalida').value;
+
+    if (nombre.trim() === "") {
+      alert("Please enter the Signature/Name before signing.");
+      return;
+    }
+
+    document.getElementById('spanNombreFirmaFinal').textContent = nombre;
+    document.getElementById('spanHoraLlegadaFinal').textContent = horaLlegada;
+    document.getElementById('spanHoraSalidaFinal').textContent = horaSalida;
+
+    var ahora = new Date();
+    // Forzamos la fecha del ejemplo para que el timestamp coincida con el día del servicio
+    // Nota: En un entorno real, esto usaría la hora real del servidor.
+    var timestampStr = '2026-01-21 ' + 
+                       ('0' + ahora.getHours()).slice(-2) + ':' + 
+                       ('0' + ahora.getMinutes()).slice(-2) + ':' + 
+                       ('0' + ahora.getSeconds()).slice(-2) + 
+                       '.554123+00 nicolas_ledesma (IP simulada)';
+    document.getElementById('timestampFinal').textContent = timestampStr;
+
+    document.getElementById('vistaFormulario').style.display = 'none';
+    document.getElementById('vistaFinal').style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  function volverAlFormulario() {
+      document.getElementById('vistaFinal').style.display = 'none';
+      document.getElementById('vistaFormulario').style.display = 'block';
+      window.scrollTo(0,0);
+  }
+</script>
+
+</body>
+</html>
